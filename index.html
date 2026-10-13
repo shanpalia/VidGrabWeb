@@ -49,7 +49,7 @@
 
             <div class="flex items-center">
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">
-                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse mr-1.5"></span> Live v2.8
+                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse mr-1.5"></span> Live v2.9
                 </span>
             </div>
         </div>
@@ -75,84 +75,132 @@
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
                         <i class="fa-solid fa-link"></i>
                     </div>
-                    <input type="url" id="videoUrl" placeholder="Paste YouTube link here..." class="w-full bg-gray-50 text-gray-900 pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white text-sm transition">
+                    <input type="url" id="videoUrl" placeholder="Paste video link here (YouTube, Instagram, etc.)..." class="w-full bg-gray-50 text-gray-900 pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white text-sm transition">
                 </div>
-                <button onclick="openFormatPopupFromInput()" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-7 py-3.5 rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center justify-center space-x-2 text-sm cursor-pointer">
+                <button onclick="handleGrabInput()" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-7 py-3.5 rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center justify-center space-x-2 text-sm cursor-pointer">
                     <i class="fa-solid fa-bolt"></i>
                     <span>Grab Now</span>
                 </button>
             </div>
         </section>
 
-        <!-- Supported Platforms (VidMate-style Browser Launcher) -->
+        <!-- Supported Platforms (Clickable to filter or open search browser) -->
         <section id="platforms" class="space-y-4 pt-4">
             <h2 class="text-lg font-bold text-gray-900 tracking-tight">Supported Platforms</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-                <div onclick="openInAppBrowser('https://m.youtube.com', 'YouTube - VidMate Browser')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="openBrowserModal('YouTube')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-red-50 text-red-600 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-youtube"></i></div>
                     <div class="text-xs font-bold text-gray-700">YouTube</div>
                 </div>
-                <div onclick="openInAppBrowser('https://www.instagram.com', 'Instagram - VidMate Browser')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="openBrowserModal('Instagram')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-pink-50 text-pink-600 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-instagram"></i></div>
                     <div class="text-xs font-bold text-gray-700">Instagram</div>
                 </div>
-                <div onclick="openInAppBrowser('https://m.facebook.com', 'Facebook - VidMate Browser')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="openBrowserModal('Facebook')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-facebook"></i></div>
                     <div class="text-xs font-bold text-gray-700">Facebook</div>
                 </div>
-                <div onclick="openInAppBrowser('https://www.tiktok.com', 'TikTok - VidMate Browser')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="openBrowserModal('TikTok')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-gray-100 text-gray-800 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-tiktok"></i></div>
                     <div class="text-xs font-bold text-gray-700">TikTok</div>
                 </div>
-                <div onclick="openInAppBrowser('https://twitter.com', 'Twitter / X - VidMate Browser')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="openBrowserModal('Twitter')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-sky-50 text-sky-500 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-twitter"></i></div>
                     <div class="text-xs font-bold text-gray-700">Twitter / X</div>
                 </div>
-                <div onclick="openInAppBrowser('https://soundcloud.com', 'MP3 Audio - VidMate Browser')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="openBrowserModal('MP3 Audio')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-purple-50 text-purple-600 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-solid fa-music"></i></div>
                     <div class="text-xs font-bold text-gray-700">MP3 Music</div>
                 </div>
             </div>
         </section>
 
+        <!-- Trending Videos Grid (VidMate Style Discovery) -->
+        <section class="space-y-4 pt-4">
+            <h2 class="text-lg font-bold text-gray-900 tracking-tight">Trending Videos & Reels</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="relative">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="w-full h-40 object-cover">
+                        <span class="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded font-mono">03:32</span>
+                    </div>
+                    <div class="p-3 space-y-2">
+                        <h4 class="font-bold text-xs line-clamp-1">Rick Astley - Never Gonna Give You Up</h4>
+                        <button onclick="selectMedia('Rick Astley - Never Gonna Give You Up', 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
+                            <i class="fa-solid fa-arrow-down mr-1"></i> Grab Video
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="relative">
+                        <img src="https://img.youtube.com/vi/jNQXAC9IVRw/hqdefault.jpg" class="w-full h-40 object-cover">
+                        <span class="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded font-mono">00:19</span>
+                    </div>
+                    <div class="p-3 space-y-2">
+                        <h4 class="font-bold text-xs line-clamp-1">Me at the zoo - First YouTube Video</h4>
+                        <button onclick="selectMedia('Me at the zoo - First YouTube Video', 'https://img.youtube.com/vi/jNQXAC9IVRw/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
+                            <i class="fa-solid fa-arrow-down mr-1"></i> Grab Video
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="relative">
+                        <img src="https://img.youtube.com/vi/L_LUpnjgPso/hqdefault.jpg" class="w-full h-40 object-cover">
+                        <span class="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded font-mono">04:15</span>
+                    </div>
+                    <div class="p-3 space-y-2">
+                        <h4 class="font-bold text-xs line-clamp-1">Official Cinematic Video Stream</h4>
+                        <button onclick="selectMedia('Official Cinematic Video Stream', 'https://img.youtube.com/vi/L_LUpnjgPso/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
+                            <i class="fa-solid fa-arrow-down mr-1"></i> Grab Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- FULLSCREEN IN-APP BROWSER MODAL (VidMate Browser UI) -->
+    <!-- FULLSCREEN PLATFORM BROWSER MODAL (VidMate In-App Browser) -->
     <div id="browserModal" class="fixed inset-0 bg-white z-50 hidden flex flex-col w-full h-full">
-        <!-- Browser Top Navigation Toolbar -->
+        <!-- Toolbar -->
         <div class="bg-gray-900 text-white px-4 py-3 flex items-center justify-between gap-3 shadow-md">
-            <div class="flex items-center space-x-3">
-                <!-- Home Button to return to VidGrab Homepage -->
-                <button onclick="closeBrowser()" class="bg-gray-800 hover:bg-brand-500 text-gray-200 hover:text-white px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1 cursor-pointer transition">
-                    <i class="fa-solid fa-house"></i>
-                    <span class="hidden sm:inline">Home</span>
-                </button>
+            <button onclick="closeBrowserModal()" class="bg-gray-800 hover:bg-brand-500 text-gray-200 px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1 cursor-pointer transition">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </button>
+            <div class="flex-grow max-w-xl bg-gray-800 border border-gray-700 px-4 py-2 rounded-xl flex items-center space-x-2 text-xs text-gray-300">
+                <i class="fa-solid fa-globe text-brand-500"></i>
+                <span id="browserTitleIndicator">Browsing Platform</span>
             </div>
-
-            <!-- Search / URL Bar -->
-            <div class="flex-grow max-w-2xl bg-gray-800 border border-gray-700 px-4 py-2 rounded-xl flex items-center space-x-2 text-sm">
-                <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
-                <input type="text" id="browserSearchInput" onkeypress="handleSearchKey(event)" placeholder="Search or type web URL..." class="w-full bg-transparent text-gray-100 focus:outline-none text-xs sm:text-sm">
-            </div>
-
-            <div class="flex items-center space-x-2">
-                <button onclick="reloadBrowser()" class="bg-gray-800 hover:bg-gray-700 text-gray-300 p-2.5 rounded-xl text-sm cursor-pointer" title="Reload">
-                    <i class="fa-solid fa-rotate-right"></i>
-                </button>
-                <button onclick="closeBrowser()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl text-xs font-bold cursor-pointer">
-                    <i class="fa-solid fa-xmark mr-1"></i> Exit
-                </button>
-            </div>
+            <button onclick="closeBrowserModal()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl text-xs font-bold cursor-pointer">
+                <i class="fa-solid fa-xmark mr-1"></i> Exit
+            </button>
         </div>
 
-        <!-- Browser Window Frame -->
-        <div class="flex-grow bg-black relative">
-            <iframe id="browserIframe" src="" class="w-full h-full border-0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            
-            <!-- Floating Red Grab Arrow Button (VidMate Style) -->
-            <button onclick="openFormatPopup()" class="absolute bottom-6 right-6 bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl animate-bounce cursor-pointer z-10 border-2 border-white">
-                <i class="fa-solid fa-arrow-down"></i>
-            </button>
+        <!-- Safe Content Feed simulating platform browse -->
+        <div class="flex-grow bg-gray-50 p-6 overflow-y-auto space-y-4">
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="bg-brand-50 border border-brand-200 p-4 rounded-xl text-brand-800 text-xs flex items-center justify-between">
+                    <span><i class="fa-solid fa-circle-info mr-1"></i> Select any video below to grab instantly:</span>
+                    <span class="font-bold">VidGrab Secure Stream</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div onclick="selectMedia('Viral Short Reel 2026', 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg')" class="bg-white border border-gray-200 p-3 rounded-xl flex items-center space-x-3 cursor-pointer hover:border-brand-500 shadow-sm transition">
+                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="w-24 h-16 object-cover rounded-lg">
+                        <div>
+                            <h4 class="font-bold text-xs text-gray-900">Viral Short Reel 2026</h4>
+                            <span class="text-[10px] text-brand-600 font-semibold"><i class="fa-solid fa-arrow-down"></i> Click to Grab</span>
+                        </div>
+                    </div>
+                    <div onclick="selectMedia('Top Trending Music Video', 'https://img.youtube.com/vi/L_LUpnjgPso/hqdefault.jpg')" class="bg-white border border-gray-200 p-3 rounded-xl flex items-center space-x-3 cursor-pointer hover:border-brand-500 shadow-sm transition">
+                        <img src="https://img.youtube.com/vi/L_LUpnjgPso/hqdefault.jpg" class="w-24 h-16 object-cover rounded-lg">
+                        <div>
+                            <h4 class="font-bold text-xs text-gray-900">Top Trending Music Video</h4>
+                            <span class="text-[10px] text-brand-600 font-semibold"><i class="fa-solid fa-arrow-down"></i> Click to Grab</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -172,10 +220,10 @@
             </div>
 
             <div class="flex items-center space-x-3 bg-gray-50 p-2.5 rounded-xl border border-gray-100">
-                <img id="popupThumb" src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="w-20 h-14 object-cover rounded-lg border border-gray-200">
+                <img id="popupThumb" src="" class="w-20 h-14 object-cover rounded-lg border border-gray-200">
                 <div class="overflow-hidden">
-                    <h4 id="popupTitle" class="font-bold text-xs text-gray-800 truncate">Active Stream Video</h4>
-                    <span class="text-[10px] bg-brand-100 text-brand-700 font-bold px-2 py-0.5 rounded-full">VidGrab Engine</span>
+                    <h4 id="popupTitle" class="font-bold text-xs text-gray-800 truncate">Video Title</h4>
+                    <span class="text-[10px] bg-brand-100 text-brand-700 font-bold px-2 py-0.5 rounded-full">PaliaAPK HUB Engine</span>
                 </div>
             </div>
 
@@ -221,48 +269,38 @@
         <p class="text-gray-400">Developer by <span class="text-brand-600 font-bold">shanpalia</span></p>
     </footer>
 
-    <!-- App Logic -->
+    <!-- Script Logic -->
     <script>
-        function openInAppBrowser(url, title) {
-            document.getElementById('browserIframe').src = url;
-            document.getElementById('browserSearchInput').value = url;
+        let selectedMediaData = {
+            title: "VidGrab Stream Media",
+            thumb: "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
+        };
+
+        function openBrowserModal(platformName) {
+            document.getElementById('browserTitleIndicator').innerText = `${platformName} - In-App Browser`;
             document.getElementById('browserModal').classList.remove('hidden');
         }
 
-        function closeBrowser() {
-            document.getElementById('browserIframe').src = "";
+        function closeBrowserModal() {
             document.getElementById('browserModal').classList.add('hidden');
         }
 
-        function reloadBrowser() {
-            const iframe = document.getElementById('browserIframe');
-            iframe.src = iframe.src;
-        }
-
-        function handleSearchKey(event) {
-            if (event.key === 'Enter') {
-                let query = document.getElementById('browserSearchInput').value.trim();
-                if(query) {
-                    if(!query.startsWith('http')) {
-                        query = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-                    }
-                    document.getElementById('browserIframe').src = query;
-                }
-            }
-        }
-
-        function openFormatPopup() {
+        function selectMedia(title, thumb) {
+            selectedMediaData.title = title;
+            selectedMediaData.thumb = thumb;
+            
+            document.getElementById('popupThumb').src = thumb;
+            document.getElementById('popupTitle').innerText = title;
             document.getElementById('formatModal').classList.remove('hidden');
         }
 
-        function openFormatPopupFromInput() {
-            const inputVal = document.getElementById('videoUrl').value.trim();
-            if(!inputVal) {
-                alert('Please enter a video URL!');
+        function handleGrabInput() {
+            const val = document.getElementById('videoUrl').value.trim();
+            if(!val) {
+                alert('Please enter or paste a valid video URL!');
                 return;
             }
-            openInAppBrowser('https://www.youtube.com/embed/dQw4w9WgXcQ', 'Active Stream');
-            openFormatPopup();
+            selectMedia('Custom Extracted Link Stream', 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg');
         }
 
         function closeFormatPopup() {
@@ -271,8 +309,8 @@
 
         function sendToDownloadPage(quality, type, size) {
             const downloadData = {
-                title: "VidGrab Stream Media (" + quality + ")",
-                thumb: "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+                title: selectedMediaData.title,
+                thumb: selectedMediaData.thumb,
                 quality: quality,
                 type: type,
                 size: size,
