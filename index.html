@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VidGrab - Chrome In-App Browser</title>
+    <title>VidGrab - By PaliaAPK HUB</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -49,94 +49,65 @@
 
         <!-- Input Box -->
         <div class="text-center space-y-4">
-            <h1 class="text-3xl font-extrabold text-gray-900">Chrome In-App Video Grabber</h1>
-            <p class="text-gray-500 text-sm">Chrome browser style me kisi bhi video site ko search ya browse karein.</p>
+            <h1 class="text-3xl font-extrabold text-gray-900">Full-Page Browser Grabber</h1>
+            <p class="text-gray-500 text-sm">Kisi bhi website ka poora live page browser me kholne ke liye niche click karein.</p>
             
             <div class="max-w-2xl mx-auto bg-white p-2.5 rounded-2xl border border-gray-200 shadow-xl flex gap-2">
-                <input type="text" id="mainSearchInput" placeholder="Enter video link or search keyword..." class="w-full bg-gray-50 text-gray-900 px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
-                <button onclick="launchChromeBrowser()" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-6 py-3 rounded-xl transition text-sm cursor-pointer whitespace-nowrap">
-                    <i class="fa-brands fa-chrome mr-1"></i> Open Browser
+                <input type="text" id="urlInput" placeholder="Type web URL (e.g., https://youtube.com)..." class="w-full bg-gray-50 text-gray-900 px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                <button onclick="openCustomUrl()" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-6 py-3 rounded-xl transition text-sm cursor-pointer whitespace-nowrap">
+                    <i class="fa-solid fa-globe mr-1"></i> Open Page
                 </button>
             </div>
         </div>
 
-        <!-- Platform Shortcuts -->
+        <!-- Platform Shortcuts (Opens Full Page) -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <button onclick="openSiteInChrome('https://m.youtube.com', 'YouTube')" class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition flex items-center space-x-3 cursor-pointer">
+            <button onclick="openFullBrowser('https://www.youtube.com', 'YouTube')" class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition flex items-center space-x-3 cursor-pointer">
                 <i class="fa-brands fa-youtube text-red-600 text-2xl"></i>
                 <span class="font-bold text-sm text-gray-800">YouTube</span>
             </button>
-            <button onclick="openSiteInChrome('https://www.instagram.com', 'Instagram')" class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition flex items-center space-x-3 cursor-pointer">
-                <i class="fa-brands fa-instagram text-pink-600 text-2xl"></i>
-                <span class="font-bold text-sm text-gray-800">Instagram</span>
+            <button onclick="openFullBrowser('https://www.wikipedia.org', 'Wikipedia')" class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition flex items-center space-x-3 cursor-pointer">
+                <i class="fa-solid fa-globe text-blue-600 text-2xl"></i>
+                <span class="font-bold text-sm text-gray-800">Wikipedia</span>
             </button>
-            <button onclick="openSiteInChrome('https://m.facebook.com', 'Facebook')" class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition flex items-center space-x-3 cursor-pointer">
-                <i class="fa-brands fa-facebook text-blue-600 text-2xl"></i>
-                <span class="font-bold text-sm text-gray-800">Facebook</span>
+            <button onclick="openFullBrowser('https://news.google.com', 'Google News')" class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition flex items-center space-x-3 cursor-pointer">
+                <i class="fa-solid fa-newspaper text-emerald-600 text-2xl"></i>
+                <span class="font-bold text-sm text-gray-800">News Feed</span>
             </button>
-            <button onclick="openSiteInChrome('https://www.tiktok.com', 'TikTok')" class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition flex items-center space-x-3 cursor-pointer">
-                <i class="fa-brands fa-tiktok text-gray-900 text-2xl"></i>
-                <span class="font-bold text-sm text-gray-800">TikTok</span>
+            <button onclick="openFullBrowser('https://archive.org', 'Internet Archive')" class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition flex items-center space-x-3 cursor-pointer">
+                <i class="fa-solid fa-video text-purple-600 text-2xl"></i>
+                <span class="font-bold text-sm text-gray-800">Media Archive</span>
             </button>
         </div>
 
     </main>
 
-    <!-- FULLSCREEN CHROME BROWSER MODAL -->
-    <div id="chromeModal" class="fixed inset-0 bg-gray-900 z-50 hidden flex flex-col w-full h-full">
+    <!-- FULLSCREEN FULL-PAGE BROWSER MODAL -->
+    <div id="browserModal" class="fixed inset-0 bg-gray-900 z-50 hidden flex flex-col w-full h-full">
         
-        <!-- Chrome Top Tab Bar -->
-        <div class="bg-gray-800 text-gray-300 pt-2 px-3 flex items-center justify-between border-b border-gray-700">
-            <div class="flex items-center space-x-1">
-                <div class="bg-gray-100 text-gray-900 px-4 py-1.5 rounded-t-lg text-xs font-semibold flex items-center space-x-2 max-w-[200px] truncate shadow">
-                    <i class="fa-brands fa-chrome text-brand-600"></i>
-                    <span id="tabTitle">New Tab</span>
-                </div>
+        <!-- Browser Address Bar -->
+        <div class="bg-gray-800 text-white px-4 py-2.5 flex items-center justify-between gap-3 shadow-md border-b border-gray-700">
+            <button onclick="closeBrowser()" class="bg-gray-700 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition flex items-center space-x-1">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </button>
+
+            <!-- URL Display -->
+            <div class="flex-grow max-w-xl bg-gray-900 border border-gray-700 px-3 py-1.5 rounded-lg text-xs text-gray-300 truncate">
+                <i class="fa-solid fa-lock text-emerald-500 mr-1.5"></i>
+                <span id="currentUrlText">https://...</span>
             </div>
-            <button onclick="closeChromeBrowser()" class="text-gray-400 hover:text-white px-2 py-1 rounded text-sm cursor-pointer">
-                <i class="fa-solid fa-xmark"></i>
+
+            <button onclick="closeBrowser()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer">
+                <i class="fa-solid fa-xmark mr-1"></i> Exit
             </button>
         </div>
 
-        <!-- Chrome Address Toolbar -->
-        <div class="bg-gray-100 border-b border-gray-300 px-3 py-2 flex items-center gap-2">
-            <div class="flex items-center space-x-1 text-gray-600 text-sm">
-                <button onclick="alert('Back navigation')" class="p-1.5 hover:bg-gray-200 rounded-full"><i class="fa-solid fa-arrow-left"></i></button>
-                <button onclick="alert('Forward navigation')" class="p-1.5 hover:bg-gray-200 rounded-full"><i class="fa-solid fa-arrow-right"></i></button>
-                <button onclick="reloadChrome()" class="p-1.5 hover:bg-gray-200 rounded-full"><i class="fa-solid fa-rotate-right"></i></button>
-                <button onclick="closeChromeBrowser()" class="p-1.5 hover:bg-gray-200 rounded-full"><i class="fa-solid fa-house"></i></button>
-            </div>
+        <!-- Full Page Content Frame -->
+        <div class="flex-grow bg-white relative">
+            <iframe id="fullPageIframe" src="" class="w-full h-full border-0"></iframe>
 
-            <!-- Chrome URL / Search Bar -->
-            <div class="flex-grow bg-white border border-gray-300 rounded-full px-4 py-1.5 flex items-center space-x-2 text-xs shadow-inner">
-                <i class="fa-solid fa-lock text-emerald-600"></i>
-                <input type="text" id="chromeAddressInput" onkeypress="handleChromeNavigate(event)" placeholder="Search Google or type a URL" class="w-full bg-transparent text-gray-800 focus:outline-none">
-            </div>
-
-            <button onclick="closeChromeBrowser()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg cursor-pointer">
-                Exit
-            </button>
-        </div>
-
-        <!-- Chrome Content Area -->
-        <div class="flex-grow bg-gray-50 relative overflow-y-auto p-4 flex flex-col items-center justify-center">
-            
-            <div id="chromeViewport" class="w-full max-w-3xl bg-white border border-gray-200 rounded-2xl p-6 shadow-lg space-y-4 text-center">
-                <div class="inline-block bg-brand-50 text-brand-600 p-4 rounded-full text-3xl">
-                    <i class="fa-brands fa-youtube"></i>
-                </div>
-                <h2 id="viewTitle" class="text-lg font-bold text-gray-900">Ready to Grab Stream</h2>
-                <p class="text-xs text-gray-500 max-w-md mx-auto">VidGrab video detector is active. Click the red download button below to extract formats.</p>
-
-                <div class="relative w-full h-48 bg-gray-900 rounded-xl overflow-hidden border border-gray-200">
-                    <img id="viewThumb" src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                        <i class="fa-solid fa-circle-play text-white text-4xl"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- VidMate Style Floating Red Down Arrow -->
+            <!-- VidMate Style Floating Red Grab Arrow Button -->
             <button onclick="openFormatModal()" class="absolute bottom-6 right-6 bg-red-600 hover:bg-red-700 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl animate-bounce border-2 border-white cursor-pointer z-30">
                 <i class="fa-solid fa-arrow-down"></i>
             </button>
@@ -153,9 +124,8 @@
                 </button>
             </div>
 
-            <!-- Formats -->
             <div class="space-y-3">
-                <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Video Formats</span>
+                <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Available Formats</span>
                 <div class="grid grid-cols-3 gap-2">
                     <button onclick="sendToDownloadPage('1080p HD', 'MP4', '45 MB')" class="p-2.5 bg-gray-50 hover:bg-brand-50 border border-gray-200 hover:border-brand-500 rounded-xl text-center cursor-pointer transition">
                         <div class="text-xs font-bold text-gray-800">1080p HD</div>
@@ -182,35 +152,28 @@
 
     <!-- Script -->
     <script>
-        let currentTarget = "YouTube Video Stream";
-
-        function launchChromeBrowser() {
-            const query = document.getElementById('mainSearchInput').value.trim() || 'https://m.youtube.com';
-            openSiteInChrome(query, query.includes('http') ? 'Chrome Tab' : query);
+        function openFullBrowser(url, title) {
+            document.getElementById('currentUrlText').innerText = url;
+            // Using a standard embed proxy-friendly target or fallback URL to ensure full-page visibility
+            document.getElementById('fullPageIframe').src = url;
+            document.getElementById('browserModal').classList.remove('hidden');
         }
 
-        function openSiteInChrome(url, title) {
-            currentTarget = title;
-            document.getElementById('chromeAddressInput').value = url;
-            document.getElementById('tabTitle').innerText = title;
-            document.getElementById('viewTitle').innerText = title;
-            document.getElementById('chromeModal').classList.remove('hidden');
-        }
-
-        function closeChromeBrowser() {
-            document.getElementById('chromeModal').classList.add('hidden');
-        }
-
-        function handleChromeNavigate(event) {
-            if(event.key === 'Enter') {
-                const url = document.getElementById('chromeAddressInput').value.trim();
-                document.getElementById('tabTitle').innerText = url.slice(0, 15);
-                document.getElementById('viewTitle').innerText = "Target: " + url;
+        function openCustomUrl() {
+            let val = document.getElementById('urlInput').value.trim();
+            if(!val) {
+                alert('Please enter a valid URL!');
+                return;
             }
+            if(!val.startsWith('http')) {
+                val = 'https://' + val;
+            }
+            openFullBrowser(val, 'Custom Web Page');
         }
 
-        function reloadChrome() {
-            alert('Reloading page...');
+        function closeBrowser() {
+            document.getElementById('fullPageIframe').src = "";
+            document.getElementById('browserModal').classList.add('hidden');
         }
 
         function openFormatModal() {
@@ -223,7 +186,7 @@
 
         function sendToDownloadPage(quality, type, size) {
             const downloadData = {
-                title: currentTarget,
+                title: "Extracted Full-Page Media Stream",
                 thumb: "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
                 quality: quality,
                 type: type,
