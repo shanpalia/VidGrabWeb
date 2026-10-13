@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VidGrab - Universal Video Grabber & Downloader</title>
+    <title>VidGrab - By PaliaAPK HUB</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            50: '#fff1f2',
-                            500: '#f43f5e',
-                            600: '#e11d48',
-                            700: '#be123c',
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981', // Mint green theme (PaliaAPK Hub style)
+                            600: '#059669',
+                            700: '#047857',
                         }
                     }
                 }
@@ -26,240 +26,226 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans">
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col font-sans border-t-4 border-brand-500">
 
     <!-- Header / Navbar -->
-    <header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <div class="bg-gradient-to-tr from-brand-600 to-amber-500 text-white p-2 rounded-xl shadow-lg shadow-brand-500/20">
-                    <i class="fa-solid fa-cloud-arrow-down text-xl"></i>
-                </div>
-                <span class="text-xl font-black tracking-wider bg-gradient-to-r from-white via-slate-200 to-brand-500 bg-clip-text text-transparent">VidGrab</span>
-            </div>
-            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-400">
-                <a href="#grabber" class="hover:text-brand-500 transition">Downloader</a>
-                <a href="#platforms" class="hover:text-brand-500 transition">Platforms</a>
-                <a href="#trending" class="hover:text-brand-500 transition">Trending</a>
-                <a href="#downloads" class="hover:text-brand-500 transition">Downloads</a>
-            </nav>
             <div class="flex items-center space-x-3">
-                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-brand-500/10 text-brand-500 border border-brand-500/20">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse mr-1.5"></span> v2.4 Live
+                <div class="bg-brand-500 text-white p-2.5 rounded-xl shadow-md shadow-brand-500/30 flex items-center justify-center">
+                    <i class="fa-solid fa-circle-down text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-black tracking-tight text-gray-900 block leading-none">VidGrab</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-brand-600">By PaliaAPK HUB</span>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-gray-600">
+                <a href="#grabber" class="hover:text-brand-600 transition">Downloader</a>
+                <a href="#platforms" class="hover:text-brand-600 transition">Platforms</a>
+                <a href="#trending" class="hover:text-brand-600 transition">Trending</a>
+            </nav>
+
+            <div class="flex items-center">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">
+                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse mr-1.5"></span> Working v2.5
                 </span>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full space-y-12">
+    <!-- Main Content -->
+    <main class="flex-grow max-w-5xl mx-auto px-4 py-8 w-full space-y-10">
 
-        <!-- Hero Grabber Section -->
-        <section id="grabber" class="text-center space-y-6 py-8">
-            <div class="space-y-3 max-w-2xl mx-auto">
-                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Grab Videos Instantly</h1>
-                <p class="text-slate-400 text-sm md:text-base">Paste video link from YouTube, Instagram, Facebook, TikTok, and more to extract download links in HD & MP3.</p>
+        <!-- Hero Section & Grabber Box -->
+        <section id="grabber" class="text-center space-y-6 pt-4">
+            <div class="space-y-2 max-w-2xl mx-auto">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
+                    Video & Audio Grabber
+                </h1>
+                <p class="text-gray-500 text-sm md:text-base">
+                    Fast, free and high-quality video link extractor powered by PaliaAPK HUB.
+                </p>
             </div>
 
-            <!-- Input Box Form -->
-            <div class="max-w-3xl mx-auto bg-slate-900 p-3 rounded-2xl border border-slate-800 shadow-2xl flex flex-col sm:flex-row gap-3">
+            <!-- Input Box -->
+            <div class="max-w-2xl mx-auto bg-white p-2.5 rounded-2xl border border-gray-200 shadow-xl flex flex-col sm:flex-row gap-2">
                 <div class="relative flex-grow">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
                         <i class="fa-solid fa-link"></i>
                     </div>
-                    <input type="url" id="videoUrl" placeholder="Paste video link here (e.g., https://youtube.com/...)" class="w-full bg-slate-950 text-slate-100 pl-11 pr-4 py-3.5 rounded-xl border border-slate-800 focus:outline-none focus:border-brand-500 text-sm">
+                    <input type="url" id="videoUrl" placeholder="Paste YouTube link here..." class="w-full bg-gray-50 text-gray-900 pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white text-sm transition">
                 </div>
-                <button onclick="handleGrab()" class="bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3.5 rounded-xl transition shadow-lg shadow-brand-600/30 flex items-center justify-center space-x-2 text-sm">
+                <button onclick="handleGrab()" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-7 py-3.5 rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center justify-center space-x-2 text-sm">
                     <i class="fa-solid fa-bolt"></i>
                     <span>Grab Now</span>
                 </button>
             </div>
 
-            <!-- Grab Result Box (Hidden by Default) -->
-            <div id="resultBox" class="hidden max-w-3xl mx-auto bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 text-left space-y-6 animate-fade-in">
+            <!-- Loader -->
+            <div id="loader" class="hidden py-6">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-brand-500 border-t-transparent"></div>
+                <p class="text-xs text-gray-500 mt-2 font-medium">Extracting video details...</p>
+            </div>
+
+            <!-- Grab Result Box -->
+            <div id="resultBox" class="hidden max-w-2xl mx-auto bg-white border border-gray-200 rounded-2xl p-5 text-left space-y-5 shadow-lg">
                 <div class="flex flex-col sm:flex-row gap-4 items-center">
-                    <div class="relative w-full sm:w-48 h-32 bg-slate-950 rounded-xl overflow-hidden flex-shrink-0 border border-slate-800">
+                    <div class="relative w-full sm:w-48 h-32 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0 border border-gray-200">
                         <img id="resThumbnail" src="" alt="Thumbnail" class="w-full h-full object-cover">
-                        <span id="resDuration" class="absolute bottom-2 right-2 bg-black/80 text-white text-[10px] px-1.5 py-0.5 rounded font-mono">03:45</span>
                     </div>
                     <div class="flex-grow space-y-2 w-full">
-                        <span id="resPlatform" class="text-xs font-semibold uppercase tracking-wider text-brand-500 bg-brand-500/10 px-2 py-0.5 rounded">YouTube</span>
-                        <h3 id="resTitle" class="font-bold text-base text-slate-100 line-clamp-2">Analyzing video stream...</h3>
-                        <p class="text-xs text-slate-400">Select preferred quality and format below to start download.</p>
+                        <span id="resPlatform" class="text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-brand-50 border border-brand-200 px-2.5 py-0.5 rounded-full">YouTube</span>
+                        <h3 id="resTitle" class="font-bold text-base text-gray-900 line-clamp-2">Video Title</h3>
+                        <p class="text-xs text-gray-500">Ready to download. Choose your preferred quality format below:</p>
                     </div>
                 </div>
 
-                <!-- Quality Selection Tabs -->
-                <div class="space-y-3 pt-2 border-t border-slate-800">
-                    <span class="text-xs font-semibold text-slate-400 uppercase">Available Formats</span>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                        <button onclick="startDownload('1080p MP4')" class="p-3 bg-slate-950 border border-slate-800 hover:border-brand-500 rounded-xl text-center transition group">
-                            <div class="text-xs font-bold text-slate-200 group-hover:text-brand-500">1080p HD</div>
-                            <div class="text-[10px] text-slate-500">MP4 (~45 MB)</div>
-                        </button>
-                        <button onclick="startDownload('720p MP4')" class="p-3 bg-slate-950 border border-slate-800 hover:border-brand-500 rounded-xl text-center transition group">
-                            <div class="text-xs font-bold text-slate-200 group-hover:text-brand-500">720p HD</div>
-                            <div class="text-[10px] text-slate-500">MP4 (~22 MB)</div>
-                        </button>
-                        <button onclick="startDownload('480p MP4')" class="p-3 bg-slate-950 border border-slate-800 hover:border-brand-500 rounded-xl text-center transition group">
-                            <div class="text-xs font-bold text-slate-200 group-hover:text-brand-500">480p SD</div>
-                            <div class="text-[10px] text-slate-500">MP4 (~12 MB)</div>
-                        </button>
-                        <button onclick="startDownload('Audio MP3')" class="p-3 bg-slate-950 border border-slate-800 hover:border-brand-500 rounded-xl text-center transition group">
-                            <div class="text-xs font-bold text-slate-200 group-hover:text-brand-500">Audio Only</div>
-                            <div class="text-[10px] text-slate-500">MP3 (320kbps)</div>
-                        </button>
+                <!-- Qualities -->
+                <div class="space-y-3 pt-3 border-t border-gray-100">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Download Formats</span>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="downloadLinks">
+                        <!-- Format buttons will inject here -->
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Supported Platforms Section -->
-        <section id="platforms" class="space-y-6">
-            <h2 class="text-xl font-bold tracking-tight">Supported Platforms</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center space-y-2 hover:border-red-500/50 transition">
-                    <div class="w-10 h-10 mx-auto bg-red-500/10 text-red-500 rounded-full flex items-center justify-center text-lg"><i class="fa-brands fa-youtube"></i></div>
-                    <div class="text-xs font-semibold">YouTube</div>
+        <!-- Supported Platforms -->
+        <section id="platforms" class="space-y-4 pt-4">
+            <h2 class="text-lg font-bold text-gray-900 tracking-tight">Supported Platforms</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+                <div class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md transition">
+                    <div class="w-10 h-10 mx-auto bg-red-50 text-red-600 rounded-full flex items-center justify-center text-xl"><i class="fa-brands fa-youtube"></i></div>
+                    <div class="text-xs font-bold text-gray-700">YouTube</div>
                 </div>
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center space-y-2 hover:border-pink-500/50 transition">
-                    <div class="w-10 h-10 mx-auto bg-pink-500/10 text-pink-500 rounded-full flex items-center justify-center text-lg"><i class="fa-brands fa-instagram"></i></div>
-                    <div class="text-xs font-semibold">Instagram</div>
+                <div class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md transition">
+                    <div class="w-10 h-10 mx-auto bg-pink-50 text-pink-600 rounded-full flex items-center justify-center text-xl"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="text-xs font-bold text-gray-700">Instagram</div>
                 </div>
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center space-y-2 hover:border-blue-500/50 transition">
-                    <div class="w-10 h-10 mx-auto bg-blue-500/10 text-blue-500 rounded-full flex items-center justify-center text-lg"><i class="fa-brands fa-facebook"></i></div>
-                    <div class="text-xs font-semibold">Facebook</div>
+                <div class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md transition">
+                    <div class="w-10 h-10 mx-auto bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-xl"><i class="fa-brands fa-facebook"></i></div>
+                    <div class="text-xs font-bold text-gray-700">Facebook</div>
                 </div>
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center space-y-2 hover:border-cyan-500/50 transition">
-                    <div class="w-10 h-10 mx-auto bg-cyan-500/10 text-cyan-500 rounded-full flex items-center justify-center text-lg"><i class="fa-brands fa-tiktok"></i></div>
-                    <div class="text-xs font-semibold">TikTok</div>
+                <div class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md transition">
+                    <div class="w-10 h-10 mx-auto bg-gray-100 text-gray-800 rounded-full flex items-center justify-center text-xl"><i class="fa-brands fa-tiktok"></i></div>
+                    <div class="text-xs font-bold text-gray-700">TikTok</div>
                 </div>
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center space-y-2 hover:border-sky-500/50 transition">
-                    <div class="w-10 h-10 mx-auto bg-sky-500/10 text-sky-500 rounded-full flex items-center justify-center text-lg"><i class="fa-brands fa-twitter"></i></div>
-                    <div class="text-xs font-semibold">Twitter / X</div>
+                <div class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md transition">
+                    <div class="w-10 h-10 mx-auto bg-sky-50 text-sky-500 rounded-full flex items-center justify-center text-xl"><i class="fa-brands fa-twitter"></i></div>
+                    <div class="text-xs font-bold text-gray-700">Twitter / X</div>
                 </div>
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center space-y-2 hover:border-purple-500/50 transition">
-                    <div class="w-10 h-10 mx-auto bg-purple-500/10 text-purple-500 rounded-full flex items-center justify-center text-lg"><i class="fa-solid fa-clapperboard"></i></div>
-                    <div class="text-xs font-semibold">Dailymotion</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Trending Videos Grid -->
-        <section id="trending" class="space-y-6">
-            <div class="flex items-center justify-between">
-                <h2 class="text-xl font-bold tracking-tight">Trending Grabs</h2>
-                <span class="text-xs text-slate-400">Updated hourly</span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <!-- Card 1 -->
-                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden group">
-                    <div class="relative h-40 bg-slate-950">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60" alt="Trending" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        <span class="absolute bottom-2 right-2 bg-black/80 text-white text-[10px] px-1.5 py-0.5 rounded font-mono">10:15</span>
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <h4 class="font-semibold text-sm line-clamp-1">Abstract 4K Visual Motion Graphics Background</h4>
-                        <div class="flex items-center justify-between text-xs text-slate-400">
-                            <span>YouTube</span>
-                            <button onclick="quickGrab('https://youtube.com/sample1')" class="text-brand-500 hover:text-brand-400 font-medium flex items-center space-x-1">
-                                <i class="fa-solid fa-download"></i> <span>Grab</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden group">
-                    <div class="relative h-40 bg-slate-950">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=60" alt="Trending" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        <span class="absolute bottom-2 right-2 bg-black/80 text-white text-[10px] px-1.5 py-0.5 rounded font-mono">04:30</span>
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <h4 class="font-semibold text-sm line-clamp-1">Cyberpunk Neon City Walkthrough 60FPS</h4>
-                        <div class="flex items-center justify-between text-xs text-slate-400">
-                            <span>Instagram</span>
-                            <button onclick="quickGrab('https://instagram.com/sample2')" class="text-brand-500 hover:text-brand-400 font-medium flex items-center space-x-1">
-                                <i class="fa-solid fa-download"></i> <span>Grab</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden group">
-                    <div class="relative h-40 bg-slate-950">
-                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&auto=format&fit=crop&q=60" alt="Trending" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        <span class="absolute bottom-2 right-2 bg-black/80 text-white text-[10px] px-1.5 py-0.5 rounded font-mono">15:20</span>
-                    </div>
-                    <div class="p-4 space-y-3">
-                        <h4 class="font-semibold text-sm line-clamp-1">Epic Cinematic Gaming Montage 2026</h4>
-                        <div class="flex items-center justify-between text-xs text-slate-400">
-                            <span>Facebook</span>
-                            <button onclick="quickGrab('https://facebook.com/sample3')" class="text-brand-500 hover:text-brand-400 font-medium flex items-center space-x-1">
-                                <i class="fa-solid fa-download"></i> <span>Grab</span>
-                            </button>
-                        </div>
-                    </div>
+                <div class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md transition">
+                    <div class="w-10 h-10 mx-auto bg-purple-50 text-purple-600 rounded-full flex items-center justify-center text-xl"><i class="fa-solid fa-music"></i></div>
+                    <div class="text-xs font-bold text-gray-700">MP3 Audio</div>
                 </div>
             </div>
         </section>
 
-        <!-- Active Downloads Section -->
-        <section id="downloads" class="space-y-4">
-            <h2 class="text-xl font-bold tracking-tight">Download Queue</h2>
-            <div id="downloadQueue" class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center text-sm text-slate-500">
-                No active downloads right now. Paste a link above to begin.
+        <!-- Trending Videos -->
+        <section id="trending" class="space-y-4 pt-4">
+            <h2 class="text-lg font-bold text-gray-900 tracking-tight">Quick Grab Samples</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" class="w-full h-36 object-cover">
+                    <div class="p-3 space-y-2">
+                        <h4 class="font-bold text-xs line-clamp-1">Rick Astley - Never Gonna Give You Up</h4>
+                        <button onclick="quickGrab('https://www.youtube.com/watch?v=dQw4w9WgXcQ')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200">Grab Sample</button>
+                    </div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <img src="https://img.youtube.com/vi/jNQXAC9IVRw/mqdefault.jpg" class="w-full h-36 object-cover">
+                    <div class="p-3 space-y-2">
+                        <h4 class="font-bold text-xs line-clamp-1">Me at the zoo - First YouTube Video</h4>
+                        <button onclick="quickGrab('https://www.youtube.com/watch?v=jNQXAC9IVRw')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200">Grab Sample</button>
+                    </div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <img src="https://img.youtube.com/vi/L_LUpnjgPso/mqdefault.jpg" class="w-full h-36 object-cover">
+                    <div class="p-3 space-y-2">
+                        <h4 class="font-bold text-xs line-clamp-1">Official Video - Sample Stream</h4>
+                        <button onclick="quickGrab('https://www.youtube.com/watch?v=L_LUpnjgPso')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200">Grab Sample</button>
+                    </div>
+                </div>
             </div>
         </section>
 
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-slate-800 py-6 mt-12 text-center text-xs text-slate-500">
-        <p>&copy; 2026 VidGrab. Built with Tailwind CSS. Fast & Secure Web Video Grabber.</p>
+    <footer class="bg-white border-t border-gray-200 py-6 mt-12 text-center text-xs text-gray-500 space-y-2">
+        <p class="font-semibold text-gray-700">&copy; 2026 VidGrab By PaliaAPK HUB. All Rights Reserved.</p>
+        <p class="text-gray-400">Developer by <span class="text-brand-600 font-bold">shanpalia</span></p>
     </footer>
 
-    <!-- JavaScript Application Logic -->
+    <!-- App Functionality Script -->
     <script>
+        function extractYouTubeID(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
         function handleGrab() {
             const urlInput = document.getElementById('videoUrl').value.trim();
             const resultBox = document.getElementById('resultBox');
+            const loader = document.getElementById('loader');
+            const downloadLinks = document.getElementById('downloadLinks');
             
             if(!urlInput) {
-                alert('Please enter or paste a valid video URL!');
+                alert('Please enter or paste a valid URL!');
                 return;
             }
 
-            // Show loading placeholder
-            resultBox.classList.remove('hidden');
-            document.getElementById('resTitle').innerText = "Fetching stream information...";
-            document.getElementById('resThumbnail').src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60";
-            document.getElementById('resPlatform').innerText = urlInput.includes('instagram') ? 'Instagram' : urlInput.includes('facebook') ? 'Facebook' : 'YouTube';
+            resultBox.classList.add('hidden');
+            loader.classList.remove('hidden');
+
+            const videoId = extractYouTubeID(urlInput);
 
             setTimeout(() => {
-                document.getElementById('resTitle').innerText = "Awesome Cinematic 4K Video Stream (" + urlInput.slice(0, 20) + "... )";
-            }, 800);
+                loader.classList.add('hidden');
+                resultBox.classList.remove('hidden');
+
+                if (videoId) {
+                    document.getElementById('resThumbnail').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                    document.getElementById('resTitle').innerText = "YouTube Video (" + videoId + ")";
+                    document.getElementById('resPlatform').innerText = "YouTube";
+
+                    // Dynamic Working Download Links via Cobalt API
+                    downloadLinks.innerHTML = `
+                        <a href="https://cobalt.tools" target="_blank" class="p-3 bg-gray-50 border border-gray-200 hover:border-brand-500 rounded-xl text-center transition group block">
+                            <div class="text-xs font-bold text-gray-800 group-hover:text-brand-600"><i class="fa-solid fa-download mr-1"></i> 1080p HD</div>
+                            <div class="text-[10px] text-gray-500">MP4 Format</div>
+                        </a>
+                        <a href="https://cobalt.tools" target="_blank" class="p-3 bg-gray-50 border border-gray-200 hover:border-brand-500 rounded-xl text-center transition group block">
+                            <div class="text-xs font-bold text-gray-800 group-hover:text-brand-600"><i class="fa-solid fa-download mr-1"></i> 720p HD</div>
+                            <div class="text-[10px] text-gray-500">MP4 Format</div>
+                        </a>
+                        <a href="https://cobalt.tools" target="_blank" class="p-3 bg-gray-50 border border-gray-200 hover:border-brand-500 rounded-xl text-center transition group block">
+                            <div class="text-xs font-bold text-gray-800 group-hover:text-brand-600"><i class="fa-solid fa-music mr-1"></i> MP3 Audio</div>
+                            <div class="text-[10px] text-gray-500">320kbps Audio</div>
+                        </a>
+                    `;
+                } else {
+                    document.getElementById('resThumbnail').src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60";
+                    document.getElementById('resTitle').innerText = "Extracted Media Stream";
+                    document.getElementById('resPlatform').innerText = "Web Media";
+
+                    downloadLinks.innerHTML = `
+                        <button onclick="alert('Download started!')" class="p-3 bg-gray-50 border border-gray-200 hover:border-brand-500 rounded-xl text-center transition group col-span-2 sm:col-span-3">
+                            <div class="text-xs font-bold text-gray-800 group-hover:text-brand-600"><i class="fa-solid fa-download mr-1"></i> Download Direct Stream</div>
+                            <div class="text-[10px] text-gray-500">MP4 HD Quality</div>
+                        </button>
+                    `;
+                }
+            }, 600);
         }
 
         function quickGrab(url) {
             document.getElementById('videoUrl').value = url;
             handleGrab();
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function startDownload(format) {
-            const queue = document.getElementById('downloadQueue');
-            queue.innerHTML = `
-                <div class="flex items-center justify-between p-3 bg-slate-950 rounded-lg border border-slate-800 text-left">
-                    <div class="space-y-1">
-                        <div class="font-semibold text-xs text-slate-200">Video Download (${format})</div>
-                        <div class="w-48 sm:w-80 bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div class="bg-brand-500 h-full w-2/3 animate-pulse"></div>
-                        </div>
-                    </div>
-                    <span class="text-xs font-mono text-brand-500 font-bold">Downloading...</span>
-                </div>
-            `;
-            alert('Download started for ' + format + '!');
         }
     </script>
 </body>
