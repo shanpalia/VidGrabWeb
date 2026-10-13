@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloads - VidGrab By PaliaAPK HUB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#10b981',
+                            600: '#059669',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col font-sans border-t-4 border-brand-500">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="bg-gray-100 text-gray-700 p-2 rounded-lg hover:bg-gray-200 text-sm">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <span class="text-xl font-black text-gray-900">Download Manager</span>
+            </div>
+            <span class="text-xs font-bold text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">
+                VidGrab Engine
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-3xl mx-auto px-4 py-8 w-full space-y-6">
+        <h2 class="text-lg font-bold text-gray-900">Active Task</h2>
+
+        <!-- Active Task Card -->
+        <div id="downloadCard" class="bg-white border border-gray-200 rounded-2xl p-5 shadow-lg space-y-4">
+            <div class="flex items-center space-x-4">
+                <img id="taskThumb" src="" class="w-24 h-16 object-cover rounded-xl border border-gray-200">
+                <div class="flex-grow overflow-hidden">
+                    <h3 id="taskTitle" class="font-bold text-sm text-gray-900 truncate">Video Title</h3>
+                    <div class="flex items-center space-x-2 mt-1">
+                        <span id="taskQuality" class="text-[10px] font-bold bg-brand-50 text-brand-700 px-2 py-0.5 rounded-full">1080p HD</span>
+                        <span id="taskSize" class="text-[10px] text-gray-500">45 MB</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="space-y-1.5">
+                <div class="flex justify-between text-xs font-bold">
+                    <span id="taskStatus" class="text-brand-600">Downloading...</span>
+                    <span id="taskPercent" class="text-gray-700">0%</span>
+                </div>
+                <div class="w-full bg-gray-100 h-3 rounded-full overflow-hidden border border-gray-200">
+                    <div id="progressBar" class="bg-brand-500 h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <div class="pt-2 flex justify-end">
+                <button id="saveBtn" disabled class="bg-gray-300 text-white font-bold px-5 py-2 rounded-xl text-xs flex items-center space-x-2 cursor-not-allowed">
+                    <i class="fa-solid fa-file-arrow-down"></i>
+                    <span>Save to File</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 text-center text-xs text-gray-500 space-y-2">
+        <p class="font-semibold text-gray-700">&copy; 2026 VidGrab By PaliaAPK HUB. All Rights Reserved.</p>
+        <p class="text-gray-400">Developer by <span class="text-brand-600 font-bold">shanpalia</span></p>
+    </footer>
+
+    <!-- Download Progress Script -->
+    <script>
+        const data = JSON.parse(localStorage.getItem('vidgrab_active_download'));
+
+        if(data) {
+            document.getElementById('taskThumb').src = data.thumb;
+            document.getElementById('taskTitle').innerText = data.title;
+            document.getElementById('taskQuality').innerText = `${data.quality} (${data.type})`;
+            document.getElementById('taskSize').innerText = data.size;
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                document.getElementById('progressBar').style.width = progress + '%';
+                document.getElementById('taskPercent').innerText = progress + '%';
+
+                if(progress >= 100) {
+                    clearInterval(interval);
+                    document.getElementById('taskStatus').innerText = "Completed";
+                    document.getElementById('taskStatus').className = "text-green-600 font-bold";
+                    
+                    const saveBtn = document.getElementById('saveBtn');
+                    saveBtn.className = "bg-brand-500 hover:bg-brand-600 text-white font-bold px-5 py-2 rounded-xl text-xs flex items-center space-x-2 cursor-pointer shadow-md";
+                    saveBtn.disabled = false;
+                    saveBtn.onclick = () => {
+                        window.open("https://cobalt.tools", "_blank");
+                    };
+                }
+            }, 300);
+        }
+    </script>
+</body>
+</html>
