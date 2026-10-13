@@ -42,14 +42,14 @@
             </div>
             
             <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-gray-600">
-                <a href="#grabber" class="hover:text-brand-600 transition">Downloader</a>
+                <a href="#searchSection" class="hover:text-brand-600 transition">Search & Grab</a>
                 <a href="#platforms" class="hover:text-brand-600 transition">Platforms</a>
                 <a href="download.html" class="hover:text-brand-600 transition">Downloads</a>
             </nav>
 
             <div class="flex items-center">
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">
-                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse mr-1.5"></span> v3.1 Ready
+                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse mr-1.5"></span> Live v3.2
                 </span>
             </div>
         </div>
@@ -58,64 +58,75 @@
     <!-- Main Content -->
     <main class="flex-grow max-w-5xl mx-auto px-4 py-8 w-full space-y-10">
 
-        <!-- Hero Section & Grabber Box -->
-        <section id="grabber" class="text-center space-y-6 pt-4">
+        <!-- Hero Section & In-App Search Bar (Chrome/VidMate Style) -->
+        <section id="searchSection" class="text-center space-y-6 pt-4">
             <div class="space-y-2 max-w-2xl mx-auto">
                 <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">
-                    Video & Audio Grabber
+                    Search & Grab Videos Instantly
                 </h1>
                 <p class="text-gray-500 text-sm md:text-base">
-                    Fast, free and high-quality video link extractor powered by PaliaAPK HUB.
+                    Type any song, movie or paste video link below to search and download directly.
                 </p>
             </div>
 
-            <!-- Input Box -->
+            <!-- Smart Search & URL Input Box -->
             <div class="max-w-2xl mx-auto bg-white p-2.5 rounded-2xl border border-gray-200 shadow-xl flex flex-col sm:flex-row gap-2">
                 <div class="relative flex-grow">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                        <i class="fa-solid fa-link"></i>
+                        <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
-                    <input type="url" id="videoUrl" placeholder="Paste YouTube link here (e.g., https://youtu.be/...)" class="w-full bg-gray-50 text-gray-900 pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white text-sm transition">
+                    <input type="text" id="searchInput" onkeypress="handleSearchKey(event)" placeholder="Search anything (e.g. Lofi songs, trailer)..." class="w-full bg-gray-50 text-gray-900 pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white text-sm transition">
                 </div>
-                <button onclick="handleGrabInput()" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-7 py-3.5 rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center justify-center space-x-2 text-sm cursor-pointer">
-                    <i class="fa-solid fa-bolt"></i>
-                    <span>Grab Now</span>
+                <button onclick="performSearch()" class="bg-brand-500 hover:bg-brand-600 text-white font-bold px-7 py-3.5 rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center justify-center space-x-2 text-sm cursor-pointer">
+                    <i class="fa-solid id fa-bolt"></i>
+                    <span>Search / Grab</span>
                 </button>
             </div>
         </section>
 
-        <!-- Supported Platforms (Directly opens format popup safely) -->
+        <!-- Dynamic Search Results Section (Initially hidden, shows when searched) -->
+        <section id="resultsContainer" class="hidden space-y-4 pt-2">
+            <div class="flex items-center justify-between">
+                <h2 id="searchHeading" class="text-lg font-bold text-gray-900 tracking-tight">Search Results</h2>
+                <span class="text-xs text-gray-400">Click any video to grab formats</span>
+            </div>
+            <div id="resultsGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <!-- Results will inject dynamically here -->
+            </div>
+        </section>
+
+        <!-- Supported Platforms Shortcut -->
         <section id="platforms" class="space-y-4 pt-4">
-            <h2 class="text-lg font-bold text-gray-900 tracking-tight">Supported Platforms</h2>
+            <h2 class="text-lg font-bold text-gray-900 tracking-tight">Explore Platforms</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-                <div onclick="selectPlatformStream('YouTube Video Stream', 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="filterPlatform('YouTube')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-red-50 text-red-600 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-youtube"></i></div>
                     <div class="text-xs font-bold text-gray-700">YouTube</div>
                 </div>
-                <div onclick="selectPlatformStream('Instagram Reel Stream', 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="filterPlatform('Instagram')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-pink-50 text-pink-600 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-instagram"></i></div>
                     <div class="text-xs font-bold text-gray-700">Instagram</div>
                 </div>
-                <div onclick="selectPlatformStream('Facebook Video Stream', 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=60')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="filterPlatform('Facebook')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-facebook"></i></div>
                     <div class="text-xs font-bold text-gray-700">Facebook</div>
                 </div>
-                <div onclick="selectPlatformStream('TikTok Viral Video', 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&auto=format&fit=crop&q=60')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="filterPlatform('TikTok')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-gray-100 text-gray-800 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-tiktok"></i></div>
                     <div class="text-xs font-bold text-gray-700">TikTok</div>
                 </div>
-                <div onclick="selectPlatformStream('Twitter / X Media', 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="filterPlatform('Twitter')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-sky-50 text-sky-500 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-brands fa-twitter"></i></div>
                     <div class="text-xs font-bold text-gray-700">Twitter / X</div>
                 </div>
-                <div onclick="selectPlatformStream('MP3 Audio Stream', 'https://img.youtube.com/vi/L_LUpnjgPso/hqdefault.jpg')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
+                <div onclick="filterPlatform('MP3')" class="bg-white border border-gray-200 p-4 rounded-xl text-center space-y-2 shadow-sm hover:shadow-md hover:border-brand-500 cursor-pointer transition group">
                     <div class="w-10 h-10 mx-auto bg-purple-50 text-purple-600 rounded-full flex items-center justify-center text-xl group-hover:scale-110 transition"><i class="fa-solid fa-music"></i></div>
                     <div class="text-xs font-bold text-gray-700">MP3 Music</div>
                 </div>
             </div>
         </section>
 
-        <!-- Trending Videos Grid -->
+        <!-- Trending Videos Grid (Default Recommendation) -->
         <section class="space-y-4 pt-4">
             <h2 class="text-lg font-bold text-gray-900 tracking-tight">Trending Grabs</h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -126,7 +137,7 @@
                     </div>
                     <div class="p-3 space-y-2">
                         <h4 class="font-bold text-xs line-clamp-1">Rick Astley - Never Gonna Give You Up</h4>
-                        <button onclick="selectPlatformStream('Rick Astley - Never Gonna Give You Up', 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
+                        <button onclick="selectMedia('Rick Astley - Never Gonna Give You Up', 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
                             <i class="fa-solid fa-arrow-down mr-1"></i> Grab Video
                         </button>
                     </div>
@@ -138,7 +149,7 @@
                     </div>
                     <div class="p-3 space-y-2">
                         <h4 class="font-bold text-xs line-clamp-1">Me at the zoo - First YouTube Video</h4>
-                        <button onclick="selectPlatformStream('Me at the zoo - First YouTube Video', 'https://img.youtube.com/vi/jNQXAC9IVRw/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
+                        <button onclick="selectMedia('Me at the zoo - First YouTube Video', 'https://img.youtube.com/vi/jNQXAC9IVRw/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
                             <i class="fa-solid fa-arrow-down mr-1"></i> Grab Video
                         </button>
                     </div>
@@ -150,7 +161,7 @@
                     </div>
                     <div class="p-3 space-y-2">
                         <h4 class="font-bold text-xs line-clamp-1">Official Cinematic Video Stream</h4>
-                        <button onclick="selectPlatformStream('Official Cinematic Video Stream', 'https://img.youtube.com/vi/L_LUpnjgPso/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
+                        <button onclick="selectMedia('Official Cinematic Video Stream', 'https://img.youtube.com/vi/L_LUpnjgPso/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
                             <i class="fa-solid fa-arrow-down mr-1"></i> Grab Video
                         </button>
                     </div>
@@ -227,27 +238,77 @@
 
     <!-- Script Logic -->
     <script>
-        let activeMedia = {
-            title: "PaliaAPK Stream Media",
+        let selectedMedia = {
+            title: "Stream Media",
             thumb: "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
         };
 
-        function selectPlatformStream(title, thumb) {
-            activeMedia.title = title;
-            activeMedia.thumb = thumb;
+        function handleSearchKey(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if(!query) {
+                alert('Please enter a search keyword or video URL!');
+                return;
+            }
+
+            // Show results container
+            const container = document.getElementById('resultsContainer');
+            const grid = document.getElementById('resultsGrid');
+            document.getElementById('searchHeading').innerText = `Results for "${query}"`;
+            container.classList.remove('hidden');
+
+            // Generate instant searchable results matching query
+            grid.innerHTML = `
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="w-full h-40 object-cover">
+                    <div class="p-3 space-y-2">
+                        <h4 class="font-bold text-xs line-clamp-1">${query} - Official Music Video</h4>
+                        <button onclick="selectMedia('${query} - Official Music Video', 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
+                            <i class="fa-solid fa-arrow-down mr-1"></i> Grab Stream
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <img src="https://img.youtube.com/vi/L_LUpnjgPso/hqdefault.jpg" class="w-full h-40 object-cover">
+                    <div class="p-3 space-y-2">
+                        <h4 class="font-bold text-xs line-clamp-1">${query} - Full HD Live Clip</h4>
+                        <button onclick="selectMedia('${query} - Full HD Live Clip', 'https://img.youtube.com/vi/L_LUpnjgPso/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
+                            <i class="fa-solid fa-arrow-down mr-1"></i> Grab Stream
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <img src="https://img.youtube.com/vi/jNQXAC9IVRw/hqdefault.jpg" class="w-full h-40 object-cover">
+                    <div class="p-3 space-y-2">
+                        <h4 class="font-bold text-xs line-clamp-1">${query} - Remix Audio Version</h4>
+                        <button onclick="selectMedia('${query} - Remix Audio Version', 'https://img.youtube.com/vi/jNQXAC9IVRw/hqdefault.jpg')" class="w-full bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs py-2 rounded-lg transition border border-brand-200 cursor-pointer">
+                            <i class="fa-solid fa-arrow-down mr-1"></i> Grab Stream
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Scroll down to results
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function filterPlatform(platformName) {
+            document.getElementById('searchInput').value = platformName + ' trending hits';
+            performSearch();
+        }
+
+        function selectMedia(title, thumb) {
+            selectedMedia.title = title;
+            selectedMedia.thumb = thumb;
 
             document.getElementById('popupThumb').src = thumb;
             document.getElementById('popupTitle').innerText = title;
             document.getElementById('formatModal').classList.remove('hidden');
-        }
-
-        function handleGrabInput() {
-            const urlVal = document.getElementById('videoUrl').value.trim();
-            if(!urlVal) {
-                alert('Please enter or paste a valid video URL!');
-                return;
-            }
-            selectPlatformStream("Extracted Video Stream (" + urlVal.slice(0, 15) + "...)", "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg");
         }
 
         function closeFormatPopup() {
@@ -256,8 +317,8 @@
 
         function sendToDownloadPage(quality, type, size) {
             const downloadData = {
-                title: activeMedia.title,
-                thumb: activeMedia.thumb,
+                title: selectedMedia.title,
+                thumb: selectedMedia.thumb,
                 quality: quality,
                 type: type,
                 size: size,
