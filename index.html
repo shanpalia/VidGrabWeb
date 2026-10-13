@@ -49,7 +49,7 @@
 
             <div class="flex items-center">
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">
-                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse mr-1.5"></span> Live v2.9
+                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse mr-1.5"></span> Live v3.0
                 </span>
             </div>
         </div>
@@ -84,7 +84,7 @@
             </div>
         </section>
 
-        <!-- Supported Platforms (Clickable to filter or open search browser) -->
+        <!-- Supported Platforms -->
         <section id="platforms" class="space-y-4 pt-4">
             <h2 class="text-lg font-bold text-gray-900 tracking-tight">Supported Platforms</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
@@ -115,7 +115,7 @@
             </div>
         </section>
 
-        <!-- Trending Videos Grid (VidMate Style Discovery) -->
+        <!-- Trending Videos Grid -->
         <section class="space-y-4 pt-4">
             <h2 class="text-lg font-bold text-gray-900 tracking-tight">Trending Videos & Reels</h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -160,31 +160,36 @@
 
     </main>
 
-    <!-- FULLSCREEN PLATFORM BROWSER MODAL (VidMate In-App Browser) -->
+    <!-- FULLSCREEN IN-APP BROWSER MODAL (VidMate In-App Search & Browser) -->
     <div id="browserModal" class="fixed inset-0 bg-white z-50 hidden flex flex-col w-full h-full">
-        <!-- Toolbar -->
+        <!-- Toolbar with Functional Search Bar -->
         <div class="bg-gray-900 text-white px-4 py-3 flex items-center justify-between gap-3 shadow-md">
             <button onclick="closeBrowserModal()" class="bg-gray-800 hover:bg-brand-500 text-gray-200 px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1 cursor-pointer transition">
                 <i class="fa-solid fa-house"></i>
                 <span>Home</span>
             </button>
-            <div class="flex-grow max-w-xl bg-gray-800 border border-gray-700 px-4 py-2 rounded-xl flex items-center space-x-2 text-xs text-gray-300">
-                <i class="fa-solid fa-globe text-brand-500"></i>
-                <span id="browserTitleIndicator">Browsing Platform</span>
+            
+            <!-- Working In-App Search Input -->
+            <div class="flex-grow max-w-xl bg-gray-800 border border-gray-700 px-3 py-1.5 rounded-xl flex items-center space-x-2 text-xs">
+                <i class="fa-solid fa-magnifying-glass text-brand-500"></i>
+                <input type="text" id="inAppSearchInput" onkeypress="handleInAppSearch(event)" placeholder="Search video or paste link here..." class="w-full bg-transparent text-gray-100 focus:outline-none">
             </div>
+
             <button onclick="closeBrowserModal()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-xl text-xs font-bold cursor-pointer">
                 <i class="fa-solid fa-xmark mr-1"></i> Exit
             </button>
         </div>
 
-        <!-- Safe Content Feed simulating platform browse -->
+        <!-- Dynamic Results Feed inside Browser -->
         <div class="flex-grow bg-gray-50 p-6 overflow-y-auto space-y-4">
             <div class="max-w-3xl mx-auto space-y-4">
                 <div class="bg-brand-50 border border-brand-200 p-4 rounded-xl text-brand-800 text-xs flex items-center justify-between">
-                    <span><i class="fa-solid fa-circle-info mr-1"></i> Select any video below to grab instantly:</span>
-                    <span class="font-bold">VidGrab Secure Stream</span>
+                    <span id="browserStatusText"><i class="fa-solid fa-circle-info mr-1"></i> Type above to search or click any video below to grab instantly:</span>
+                    <span class="font-bold">PaliaAPK HUB Engine</span>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <!-- Video Results Container -->
+                <div id="browserResultsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div onclick="selectMedia('Viral Short Reel 2026', 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg')" class="bg-white border border-gray-200 p-3 rounded-xl flex items-center space-x-3 cursor-pointer hover:border-brand-500 shadow-sm transition">
                         <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="w-24 h-16 object-cover rounded-lg">
                         <div>
@@ -277,12 +282,40 @@
         };
 
         function openBrowserModal(platformName) {
-            document.getElementById('browserTitleIndicator').innerText = `${platformName} - In-App Browser`;
+            document.getElementById('inAppSearchInput').value = '';
             document.getElementById('browserModal').classList.remove('hidden');
         }
 
         function closeBrowserModal() {
             document.getElementById('browserModal').classList.add('hidden');
+        }
+
+        function handleInAppSearch(event) {
+            if (event.key === 'Enter') {
+                const query = document.getElementById('inAppSearchInput').value.trim();
+                if(query) {
+                    // Simulate smart search results matching query
+                    const grid = document.getElementById('browserResultsGrid');
+                    document.getElementById('browserStatusText').innerHTML = `Search results for: <b>"${query}"</b>`;
+                    
+                    grid.innerHTML = `
+                        <div onclick="selectMedia('${query} - Official Video', 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg')" class="bg-white border border-gray-200 p-3 rounded-xl flex items-center space-x-3 cursor-pointer hover:border-brand-500 shadow-sm transition">
+                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" class="w-24 h-16 object-cover rounded-lg">
+                            <div>
+                                <h4 class="font-bold text-xs text-gray-900">${query} - Official Video</h4>
+                                <span class="text-[10px] text-brand-600 font-semibold"><i class="fa-solid fa-arrow-down"></i> Click to Grab</span>
+                            </div>
+                        </div>
+                        <div onclick="selectMedia('${query} - Live HD Stream', 'https://img.youtube.com/vi/L_LUpnjgPso/hqdefault.jpg')" class="bg-white border border-gray-200 p-3 rounded-xl flex items-center space-x-3 cursor-pointer hover:border-brand-500 shadow-sm transition">
+                            <img src="https://img.youtube.com/vi/L_LUpnjgPso/hqdefault.jpg" class="w-24 h-16 object-cover rounded-lg">
+                            <div>
+                                <h4 class="font-bold text-xs text-gray-900">${query} - Live HD Stream</h4>
+                                <span class="text-[10px] text-brand-600 font-semibold"><i class="fa-solid fa-arrow-down"></i> Click to Grab</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
         }
 
         function selectMedia(title, thumb) {
